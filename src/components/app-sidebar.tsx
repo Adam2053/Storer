@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import * as React from "react"
+import * as React from "react";
 import {
   IconCamera,
   IconChartBar,
@@ -13,16 +13,19 @@ import {
   IconHelp,
   IconInnerShadowTop,
   IconListDetails,
+  IconLock,
   IconReport,
+  IconRobot,
   IconSearch,
   IconSettings,
+  IconTrash,
   IconUsers,
-} from "@tabler/icons-react"
+} from "@tabler/icons-react";
 
-import { NavDocuments } from "@/components/nav-documents"
-import { NavMain } from "@/components/nav-main"
-import { NavSecondary } from "@/components/nav-secondary"
-import { NavUser } from "@/components/nav-user"
+import { NavDocuments } from "@/components/nav-documents";
+import { NavMain } from "@/components/nav-main";
+import { NavSecondary } from "@/components/nav-secondary";
+import { NavUser } from "@/components/nav-user";
 import {
   Sidebar,
   SidebarContent,
@@ -31,7 +34,10 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "@/components/ui/sidebar"
+} from "@/components/ui/sidebar";
+import { Bot, Logs, Users, Vault, VaultIcon } from "lucide-react";
+import { title } from "process";
+import { StorageUsageBar } from "./myComponents/StorageUsageBar";
 
 const data = {
   user: {
@@ -46,24 +52,24 @@ const data = {
       icon: IconDashboard,
     },
     {
-      title: "Lifecycle",
-      url: "#",
-      icon: IconListDetails,
-    },
-    {
-      title: "Analytics",
-      url: "#",
-      icon: IconChartBar,
-    },
-    {
-      title: "Projects",
+      title: "My Files",
       url: "#",
       icon: IconFolder,
     },
     {
-      title: "Team",
+      title: "Shared with Me",
       url: "#",
-      icon: IconUsers,
+      icon: Users,
+    },
+    {
+      title: "Trash",
+      url: "#",
+      icon: IconTrash,
+    },
+    {
+      title: "Ai Assistant",
+      url: "#",
+      icon: Bot,
     },
   ],
   navClouds: [
@@ -133,22 +139,17 @@ const data = {
   ],
   documents: [
     {
-      name: "Data Library",
+      name: "Vault",
       url: "#",
-      icon: IconDatabase,
+      icon: VaultIcon,
     },
     {
-      name: "Reports",
+      name: "Access logs",
       url: "#",
-      icon: IconReport,
-    },
-    {
-      name: "Word Assistant",
-      url: "#",
-      icon: IconFileWord,
+      icon: Logs,
     },
   ],
-}
+};
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
@@ -171,11 +172,12 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       <SidebarContent>
         <NavMain items={data.navMain} />
         <NavDocuments items={data.documents} />
+        <StorageUsageBar usedGB={1.7} totalGB={5} />
         <NavSecondary items={data.navSecondary} className="mt-auto" />
       </SidebarContent>
       <SidebarFooter>
         <NavUser user={data.user} />
       </SidebarFooter>
     </Sidebar>
-  )
+  );
 }
