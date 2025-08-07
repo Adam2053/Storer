@@ -12,13 +12,20 @@ import { UploadDropzone } from "./dashComponent/UploadDropzone";
 import { FilterSortBar } from "./dashComponent/FilterSortBar";
 import { DropOverlay } from "./dashComponent/DropOverlay";
 
-const filesData = [
-  { id: 1, name: "Resume.pdf", type: "pdf", size: "120KB" },
-  { id: 2, name: "ProjectProposal.docx", type: "docx", size: "300KB" },
-  { id: 3, name: "Photos.zip", type: "zip", size: "2MB" },
-  { id: 4, name: "ArkiveDesign.fig", type: "figma", size: "1.2MB" },
-  { id: 5, name: "ArkiveReviewDoc.docx", type: "docx", size: "2.2MB" },
-  { id: 6, name: "HelloHI.docx", type: "docx", size: "2.2MB" },
+type FileItem = {
+  id: string;
+  name: string;
+  type: string;
+  size: string;
+};
+
+const filesData: FileItem[] = [
+  { id: "1", name: "Resume.pdf", type: "pdf", size: "120KB" },
+  { id: "2", name: "ProjectProposal.docx", type: "docx", size: "300KB" },
+  { id: "3", name: "Photos.zip", type: "zip", size: "2MB" },
+  { id: "4", name: "ArkiveDesign.fig", type: "figma", size: "1.2MB" },
+  { id: "5", name: "ArkiveReviewDoc.docx", type: "docx", size: "2.2MB" },
+  { id: "6", name: "HelloHI.docx", type: "docx", size: "2.2MB" },
 ];
 
 const Dashboard = () => {
