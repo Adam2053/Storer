@@ -1,6 +1,12 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--primary) transparent;
+}
+
 @custom-variant dark (&:is(.dark *));
 
 /* @plugin "daisyui/theme" {
@@ -80,6 +86,29 @@
   --radius-xl: calc(var(--radius) + 4px);
 }
 
+/* === Custom Scrollbar === */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--primary);
+  border-radius: 9999px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: oklch(
+    0.77 0.13 9.25
+  ); /* fallback or darker tone if you want */
+}
+
 :root {
   --radius: 0.625rem;
   --background: oklch(1 0 0);
@@ -88,7 +117,7 @@
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.77 0.13 9.25  );
+  --primary: oklch(0.77 0.13 9.25);
   --primary-foreground: oklch(0.985 0 0);
   --secondary: oklch(0.97 0 0);
   --secondary-foreground: oklch(0.205 0 0);

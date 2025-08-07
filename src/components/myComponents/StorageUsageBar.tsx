@@ -15,7 +15,7 @@ export function StorageUsageBar({
   return (
     <div className="px-4 py-3 space-y-1 text-sm text-muted-foreground">
       <div className="flex justify-between items-center">
-        <span>Storage</span>
+        <span>Storer Storage</span>
         <span>
           {usedGB.toFixed(2)} GB / {totalGB} GB
         </span>
