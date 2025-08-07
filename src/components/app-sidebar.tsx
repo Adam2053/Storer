@@ -3,19 +3,12 @@
 import * as React from "react";
 import {
   IconCamera,
-  IconChartBar,
   IconDashboard,
-  IconDatabase,
   IconFileAi,
   IconFileDescription,
-  IconFileWord,
   IconFolder,
   IconHelp,
   IconInnerShadowTop,
-  IconListDetails,
-  IconLock,
-  IconReport,
-  IconRobot,
   IconSearch,
   IconSettings,
   IconTrash,
@@ -26,6 +19,7 @@ import { NavDocuments } from "@/components/nav-documents";
 import { NavMain } from "@/components/nav-main";
 import { NavSecondary } from "@/components/nav-secondary";
 import { NavUser } from "@/components/nav-user";
+
 import {
   Sidebar,
   SidebarContent,
@@ -35,8 +29,8 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import { Bot, Logs, Users, Vault, VaultIcon } from "lucide-react";
-import { title } from "process";
+
+import { Bot, ScrollText, Server } from "lucide-react";
 import { StorageUsageBar } from "./myComponents/StorageUsageBar";
 
 const data = {
@@ -59,7 +53,7 @@ const data = {
     {
       title: "Shared with Me",
       url: "#",
-      icon: Users,
+      icon: IconUsers,
     },
     {
       title: "Trash",
@@ -79,14 +73,8 @@ const data = {
       isActive: true,
       url: "#",
       items: [
-        {
-          title: "Active Proposals",
-          url: "#",
-        },
-        {
-          title: "Archived",
-          url: "#",
-        },
+        { title: "Active Proposals", url: "#" },
+        { title: "Archived", url: "#" },
       ],
     },
     {
@@ -94,14 +82,8 @@ const data = {
       icon: IconFileDescription,
       url: "#",
       items: [
-        {
-          title: "Active Proposals",
-          url: "#",
-        },
-        {
-          title: "Archived",
-          url: "#",
-        },
+        { title: "Active Proposals", url: "#" },
+        { title: "Archived", url: "#" },
       ],
     },
     {
@@ -109,14 +91,8 @@ const data = {
       icon: IconFileAi,
       url: "#",
       items: [
-        {
-          title: "Active Proposals",
-          url: "#",
-        },
-        {
-          title: "Archived",
-          url: "#",
-        },
+        { title: "Active Proposals", url: "#" },
+        { title: "Archived", url: "#" },
       ],
     },
   ],
@@ -141,12 +117,12 @@ const data = {
     {
       name: "Vault",
       url: "#",
-      icon: VaultIcon,
+      icon: Server,
     },
     {
       name: "Access logs",
       url: "#",
-      icon: Logs,
+      icon: ScrollText,
     },
   ],
 };
@@ -169,12 +145,14 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>
+
       <SidebarContent>
         <NavMain items={data.navMain} />
         <NavDocuments items={data.documents} />
         <StorageUsageBar usedGB={1.7} totalGB={5} />
         <NavSecondary items={data.navSecondary} className="mt-auto" />
       </SidebarContent>
+
       <SidebarFooter>
         <NavUser user={data.user} />
       </SidebarFooter>

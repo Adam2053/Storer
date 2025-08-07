@@ -17,7 +17,7 @@ export function NavDocuments({
   items: {
     name: string;
     url: string;
-    icon: Icon;
+    icon: React.ElementType;
   }[];
 }) {
   const { isMobile } = useSidebar();
