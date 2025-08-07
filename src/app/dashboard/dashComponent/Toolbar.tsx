@@ -1,19 +1,19 @@
 // components/Toolbar.tsx
 
-import React, { useRef } from "react"
-import { Button } from "@/components/ui/button"
+import React, { useRef } from "react";
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { Plus, Upload, SortAsc, ChevronDown } from "lucide-react"
+} from "@/components/ui/dropdown-menu";
+import { Plus, Upload, SortAsc, ChevronDown } from "lucide-react";
 
 interface ToolbarProps {
-  onNewFolder: () => void
-  onNewFile: () => void
-  onUpload: (files: FileList) => void
+  onNewFolder: () => void;
+  onNewFile: () => void;
+  onUpload: (files: FileList) => void;
 }
 
 export const Toolbar: React.FC<ToolbarProps> = ({
@@ -21,20 +21,20 @@ export const Toolbar: React.FC<ToolbarProps> = ({
   onNewFile,
   onUpload,
 }) => {
-  const fileInputRef = useRef<HTMLInputElement>(null)
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileUploadClick = () => {
-    fileInputRef.current?.click()
-  }
+    fileInputRef.current?.click();
+  };
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files.length > 0) {
-      onUpload(event.target.files)
+      onUpload(event.target.files);
     }
-  }
+  };
 
   return (
-    <div className="flex items-center justify-between px-4 lg:px-6 py-2 border-b bg-background sticky top-[var(--header-height)] z-20">
+    <div className="flex items-center justify-between px-4 lg:px-6 py-2 border-b bg-background ">
       {/* Left Section */}
       <div className="flex items-center gap-2">
         <DropdownMenu>
@@ -46,12 +46,18 @@ export const Toolbar: React.FC<ToolbarProps> = ({
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent>
-            <DropdownMenuItem onClick={onNewFolder}>📁 New Folder</DropdownMenuItem>
+            <DropdownMenuItem onClick={onNewFolder}>
+              📁 New Folder
+            </DropdownMenuItem>
             <DropdownMenuItem onClick={onNewFile}>📄 New File</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
 
-        <Button variant="outline" className="gap-1" onClick={handleFileUploadClick}>
+        <Button
+          variant="outline"
+          className="gap-1"
+          onClick={handleFileUploadClick}
+        >
           <Upload className="w-4 h-4" />
           Upload
         </Button>
@@ -82,5 +88,5 @@ export const Toolbar: React.FC<ToolbarProps> = ({
         </DropdownMenuContent>
       </DropdownMenu>
     </div>
-  )
-}
+  );
+};
