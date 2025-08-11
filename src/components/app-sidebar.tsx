@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import axios from "axios";
 import {
   IconCamera,
   IconDashboard,
@@ -32,6 +33,7 @@ import {
 
 import { Bot, ScrollText, Server } from "lucide-react";
 import { StorageUsageBar } from "./myComponents/StorageUsageBar";
+import { Button } from "./ui/button";
 
 const data = {
   user: {
@@ -127,7 +129,59 @@ const data = {
   ],
 };
 
+interface StorageGD {
+  limit: number;
+  usage: number;
+  usageInDrive: number;
+  usageInDriveTrash: number;
+}
+
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const [isLinked, setIsLinked] = React.useState(false);
+  const [storage, setStorage] = React.useState<StorageGD | null>(null);
+
+  const handleCheckStorage = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:3001/api/google/storage"
+      );
+      console.log(response.data);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  React.useEffect(() => {
+    const linked = localStorage.getItem("googleDriveLinked");
+    setIsLinked(linked === "true");
+  });
+
+  React.useEffect(() => {
+    const fetchStorage = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:3001/api/google/storage"
+        );
+
+        console.log(response.data.formattedQuota);
+        setStorage(response.data.formattedQuota);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    fetchStorage();
+  }, []);
+
+  const handleLinkGoogleAccount = async () => {
+    try {
+      const response = await axios.get("http://localhost:3001/api/auth/google");
+      const { url } = response.data; // Your server should return { url: googleAuthUrl }
+      window.location.href = url; // Redirect the user’s browser to the Google consent screen
+    } catch (error) {
+      console.error("Failed to start Google OAuth:", error);
+    }
+  };
   return (
     <Sidebar collapsible="offcanvas" {...props}>
       <SidebarHeader>
@@ -149,7 +203,14 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       <SidebarContent>
         <NavMain items={data.navMain} />
         <NavDocuments items={data.documents} />
-        <StorageUsageBar usedGB={1.7} totalGB={5} />
+        <StorageUsageBar provider={"Googel Drive"} usedGB={storage?.usage} totalGB={storage?.limit} />
+
+        {isLinked ? (
+          <Button disabled>✅ Linked</Button>
+        ) : (
+          <Button onClick={handleLinkGoogleAccount}>Link Google Account</Button>
+        )}
+
         <NavSecondary items={data.navSecondary} className="mt-auto" />
       </SidebarContent>
 

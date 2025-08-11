@@ -1,8 +1,11 @@
+"use client"
 
+
+import { AirplayIcon } from "lucide-react";
 import AiInput from "@/components/ui/ai-input";
 import Dashboard from "./Dashboard";
 import { Button } from "@/components/ui/button";
-import { AirplayIcon } from "lucide-react";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 export default function Page() {
   return (

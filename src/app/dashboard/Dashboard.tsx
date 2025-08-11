@@ -11,6 +11,8 @@ import { SearchBar } from "./dashComponent/SearchBar";
 import { UploadDropzone } from "./dashComponent/UploadDropzone";
 import { FilterSortBar } from "./dashComponent/FilterSortBar";
 import { DropOverlay } from "./dashComponent/DropOverlay";
+import { useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 type FileItem = {
   id: string;
@@ -34,6 +36,9 @@ const Dashboard = () => {
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
   const [dragActive, setDragActive] = useState(false);
   const dragCounter = useRef(0);
+
+  const searchParams = useSearchParams();
+  const router = useRouter();
 
   const handleFileUpload = (files: File[]) => {
     setUploadedFiles((prev) => [...prev, ...files]);
@@ -68,6 +73,17 @@ const Dashboard = () => {
     dragCounter.current = 0;
     setDragActive(false);
   }, []);
+
+  useEffect(() => {
+    const linked = searchParams.get("googleLinked");
+
+    if (linked === "true") {
+      localStorage.setItem("googleDriveLinked", "true");
+
+      const cleanUrl = window.location.pathname;
+      router.replace(cleanUrl);
+    }
+  }, [searchParams, router]);
 
   useEffect(() => {
     window.addEventListener("dragenter", handleDragEnter);
