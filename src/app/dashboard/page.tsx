@@ -1,25 +1,17 @@
-"use client"
-export const dynamic = "force-dynamic";
-
-
-import { AirplayIcon } from "lucide-react";
-import AiInput from "@/components/ui/ai-input";
+import { Suspense } from "react";
 import Dashboard from "./Dashboard";
 import { Button } from "@/components/ui/button";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { AirplayIcon } from "lucide-react";
 
 export default function Page() {
   return (
-    <div>
-      <Dashboard />
-      <Button className="z-10 fixed bottom-4 right-2 ">
-        <AirplayIcon 
-          className="hover:rotate-90 z-20"
-        />
-      </Button>
-      {/* <div className="fixed bottom-0 right-0 w-full z-10">
-        <AiInput />
-      </div> */}
-    </div>
+    <Suspense fallback={<div>Loading dashboard...</div>}>
+      <div>
+        <Dashboard />
+        <Button className="z-10 fixed bottom-4 right-2">
+          <AirplayIcon className="hover:rotate-90 z-20" />
+        </Button>
+      </div>
+    </Suspense>
   );
 }
