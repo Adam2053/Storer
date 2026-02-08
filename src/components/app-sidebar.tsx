@@ -143,7 +143,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const handleCheckStorage = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:3001/api/google/storage"
+        "https://storer-backend.onrender.com/api/google/storage"
       );
       console.log(response.data);
     } catch (err) {
@@ -160,7 +160,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     const fetchStorage = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:3001/api/google/storage"
+          "https://storer-backend.onrender.com/api/google/storage"
         );
 
         console.log(response.data.formattedQuota);
@@ -175,7 +175,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 
   const handleLinkGoogleAccount = async () => {
     try {
-      const response = await axios.get("http://localhost:3001/api/auth/google");
+      const response = await axios.get("https://storer-backend.onrender.com/api/auth/google");
       const { url } = response.data; // Your server should return { url: googleAuthUrl }
       window.location.href = url; // Redirect the user’s browser to the Google consent screen
     } catch (error) {
