@@ -193,7 +193,7 @@ export const FileGrid: React.FC<FileGridProps> = ({ viewMode }) => {
     const fetchFiles = async () => {
       setLoading(true);
       try {
-        const res = await fetch("http://localhost:3001/api/google/files");
+        const res = await fetch("https://storer-backend.onrender.com/api/google/files");
         const data = await res.json();
         if (Array.isArray(data.tree)) {
           setTree(data.tree);
